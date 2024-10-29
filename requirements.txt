@@ -1,0 +1,12 @@
+bs4==0.0.2
+google_play_scraper==1.2.7
+ipykernel==6.29.5
+matplotlib==3.9.2
+nltk==3.9.1
+pandas==2.2.3
+pyLDAvis==3.4.1
+scikit-learn==1.5.2
+seaborn==0.13.2
+spacy==3.8.2
+wordcloud==1.9.3
+vaderSentiment==3.3.2
