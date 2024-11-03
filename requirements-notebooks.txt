@@ -12,4 +12,6 @@ pyLDAvis==3.4.1
 scikit-learn==1.5.2
 seaborn==0.13.2
 spacy==3.8.2
+torch==2.5.1+cu124
 wordcloud==1.9.3
+xgboost==2.1.2
