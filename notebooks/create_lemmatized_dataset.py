@@ -2,6 +2,7 @@
 
 import re
 import warnings
+from typing import List
 
 import pandas as pd
 
@@ -16,6 +17,7 @@ nlp = spacy.load("en_core_web_sm", enable = ['lemmatizer'])
 
 def lemmatize_text(
         raw_text: str,
+        stopwords_list: List[str] = [],
     ) -> str:
     """
     This is a function to convert raw text to a string of meaningful words.
@@ -31,12 +33,6 @@ def lemmatize_text(
     
     # Remove non-letters
     letters_only = re.sub("[^a-zA-Z]", " ", review_text)
-
-    stopwords_list = [
-        'character', 'characters', 'even', 'feel', 'fun', 'game', 'Genshin', 'genshin', 
-        'good', 'great', 'like', 'lot', 'love', 'make', 'much', 'need', 'play', 'player', 
-        'playing', 'played', 'really', 'still', 'story', 'take', 'want',
-    ]
     
     # Convert words to lower case and split each word up
     words = letters_only.lower().split()
@@ -67,10 +63,16 @@ if __name__ == '__main__':
     # Defining the target variable using scores
     reviews['target'] = reviews['score'].map(lambda x: 1 if x < 4 else 0)
 
+    stopwords_list = [
+        'character', 'characters', 'even', 'feel', 'fun', 'game', 'Genshin', 'genshin', 
+        'good', 'great', 'like', 'lot', 'love', 'make', 'much', 'need', 'play', 'player', 
+        'playing', 'played', 'really', 'still', 'story', 'take', 'want',
+    ]
+
     print('Gonna start lemmatizing the texts!')
 
     # Pre-process the raw text
-    reviews['content_lemma'] = reviews['content'].map(lambda x: lemmatize_text(raw_text=x))
+    reviews['content_lemma'] = reviews['content'].map(lambda x: lemmatize_text(raw_text=x, stopwords_list=stopwords_list))
 
     print('Done lemmatizing the texts!')
 
